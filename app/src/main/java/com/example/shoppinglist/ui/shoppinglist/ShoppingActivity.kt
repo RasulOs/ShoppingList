@@ -12,10 +12,23 @@ import com.example.shoppinglist.data.db.entities.ShoppingItem
 import com.example.shoppinglist.data.repositories.ShoppingRepository
 import com.example.shoppinglist.databinding.ActivityShoppingBinding
 import com.example.shoppinglist.other.ShoppingItemAdapter
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+import javax.inject.Named
 
+@AndroidEntryPoint
 class ShoppingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityShoppingBinding
+
+    @Inject
+    @Named("DB")
+    lateinit var db: ShoppingDatabase
+
+    @Inject
+    @Named("Repository")
+    lateinit var repository: ShoppingRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +36,6 @@ class ShoppingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val db = ShoppingDatabase(this)
-        val repository = ShoppingRepository(db)
         val factory = ShoppingViewModelFactory(repository)
 
         val viewModel = ViewModelProvider(this, factory).get(ShoppingViewModel::class.java)

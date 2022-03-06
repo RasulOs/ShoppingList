@@ -26,5 +26,4 @@ class ShoppingViewModel(
     }
 
     fun getAllShoppingItems() = repository.getAllShoppingItems()
-
 }

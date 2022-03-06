@@ -34,6 +34,5 @@ abstract class ShoppingDatabase: RoomDatabase() {
             Room.databaseBuilder(context.applicationContext,
                 ShoppingDatabase::class.java, "ShoppingDB.db").build()
 
-
     }
 }
